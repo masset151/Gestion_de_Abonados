@@ -1,5 +1,8 @@
+package Modelo;
 import java.sql.ResultSet;
 import java.util.Scanner;
+
+import Controlador.ConectarBD;
 
 public class Usuarios {
 
@@ -87,6 +90,7 @@ public class Usuarios {
 
 		ConectarBD.Conectar();
 		ConectarBD.EjecutarSentencia("delete from USUARIOS where nombre = '"+nombre+"'");
+		
 	}
 
 

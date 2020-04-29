@@ -1,6 +1,9 @@
+package Modelo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import Controlador.ConectarBD;
 
 public class Abonados {
 	
@@ -15,12 +18,12 @@ static	Scanner teclado = new Scanner(System.in);
 	private	String telefono;
 	private	int clave;
 
-	protected void ListarAbonados() {
+	public void ListarAbonados() {
 
 		ConectarBD.Conectar();
 
 		ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO");
-
+		
 		try {
 			while(selectAll.next()) {
 
@@ -82,13 +85,30 @@ static	Scanner teclado = new Scanner(System.in);
 		
 		switch (codzona) {
 		case 1:
-			System.out.println("Elige Zona \n 0-Palquillo\n 1-Santa Maria de Gracia\n 2-Tribuna1,3-Tribuna2");
+			System.out.println("Elige Zona \n 0-PALQUILLO\n 1-TRIBUNA A \n 2-TRIBUNA B \n 3-DUQUE");
 			codsector = teclado.nextInt();
 			break;
 
-		default:
-			System.out.println(" No disponible");
+		case 2:
+			System.out.println("la Calle sierpes solo tiene un sector el numero 4");
+			codsector = 4;
 			break;
+			
+		case 3:
+			System.out.println("Elige Zona \n 5-SECTOR A \n 6-SECTOR B\n 7-SECTOR C");
+			codsector = teclado.nextInt();
+			break;
+			
+		case 4:
+			System.out.println("Elige Zona \n 8-PALCOS AVENIDA \n 9-BANCO DE ESPAÑA \n 10-TRAMO 40\n 11-TRAMO 50\n 12- TRAMO 60 \n 13-TRAMO 70");
+			codsector = teclado.nextInt();
+			break;
+			
+		case 6:
+			System.out.println("Elige Zona \n 14-FUENTE \n 15-CATEDRAL");
+			codsector = teclado.nextInt();
+			
+			
 		}
 		
 
@@ -126,9 +146,37 @@ private int GeneralID()  {
 protected void BorrarAbonado() {
 	System.out.println("Inserte la id del Abonado que se da de baja");
 	int num = teclado.nextInt();
-	ConectarBD.ejecutarUpdate("DELETE FROM ZONA_ABONADO WHERE ID_ABONADO ="+num);
+	ConectarBD.Conectar();
 	ConectarBD.ejecutarUpdate("DELETE FROM ABONADO WHERE ID_ABONADO = "+num);
+	ConectarBD.ejecutarUpdate("DELETE FROM ZONA_ABONADO WHERE ID_ABONADO ="+num);
 }
 
+public void ListarAbonados(int codzona) {
+	ConectarBD.Conectar();
+	ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO WHERE CODZONA ="+codzona);
+	System.out.println("ID_ABONADO\t NOMBRE \t Apellido \t Apellido2\t Direccion \t Zona \t Telefono \t Clave \t Sector");
+	try {
+		while(selectAll.next()) {
+
+			idAbonado = selectAll.getInt("id_abonado");
+			nombre = selectAll.getString("nombre");
+			apellido1 = selectAll.getString("apellido1");
+			apellido2 = selectAll.getString("apellido2");
+			codzona = selectAll.getInt("codzona");
+			direcion = selectAll.getString("DIRECCION");
+			telefono = selectAll.getString("Telefono");
+			clave = selectAll.getInt("clave");
+			codsector = selectAll.getInt("codsector");
+
+			System.out.println(idAbonado+"\t"+nombre+"\t"+apellido1+"\t"+apellido2+"\t"+direcion+"\t"+codzona+"\t"+telefono+"\t"+clave+"\t"+codsector);
+
+		}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	
+}
 
 }

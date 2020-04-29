@@ -1,3 +1,4 @@
+package Controlador;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,21 +21,22 @@ public class ConectarBD {
 	static Statement consulta;
 	static ResultSet resultado;
 
-	protected static void Conectar() {
+	public static void Conectar() {
 		try {
 			Class.forName(driver);
 			conexion = DriverManager.getConnection(url,user,pas);
 			consulta = conexion.createStatement();
-			System.out.println("conectado");
+			System.out.println(" ");
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	protected static ResultSet ejecutarUpdate(String sentencia) {
+	public static ResultSet ejecutarUpdate(String sentencia) {
 
 		try {
 			 consulta.executeUpdate(sentencia);
+			 System.out.println("Modificacion Guardada");
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 
@@ -43,7 +45,7 @@ public class ConectarBD {
 		return resultado;
 	}
 
-	protected static ResultSet EjecutarSentencia(String sentencia) {
+	public static ResultSet EjecutarSentencia(String sentencia) {
 		
 		try {
 			resultado = consulta.executeQuery(sentencia);
