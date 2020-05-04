@@ -7,13 +7,16 @@ import javax.crypto.spec.SecretKeySpec;
 
 import Modelo.Abonados;
 import Modelo.Sector;
+import Modelo.Zona;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		Abonados abonado = new Abonados();
 		Sector sector = new Sector();
+		Zona zona = new Zona();
 		
+		zona.listarZona();
 		sector.ListarSectores(1);
 		
 		
