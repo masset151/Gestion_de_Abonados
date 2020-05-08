@@ -2,7 +2,7 @@ package Modelo;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
-import Controlador.ConectarBD;
+import BBDD.ConectarBD;
 
 public class Usuarios {
 

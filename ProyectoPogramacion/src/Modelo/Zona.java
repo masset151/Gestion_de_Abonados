@@ -2,7 +2,7 @@ package Modelo;
 
 import java.sql.ResultSet;
 
-import Controlador.ConectarBD;
+import BBDD.ConectarBD;
 
 public class Zona {
 	private int codzona;
