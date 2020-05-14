@@ -8,18 +8,17 @@ import javax.crypto.spec.SecretKeySpec;
 import Modelo.Abonados;
 import Modelo.Sector;
 import Modelo.Zona;
+import Vista.AñadirAbonado;
 import Vista.Ventana;
 import Vista.tablaAbonados;
 
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
+		
+		
 		Ventana ventana = new Ventana();
-		
 		ventana.setVisible(true);
-		
-		
-		
 		
 		
 		/*Abonados abonado = new Abonados();

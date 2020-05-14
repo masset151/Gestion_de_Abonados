@@ -1,4 +1,5 @@
 package Modelo;
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,9 +28,28 @@ public class Abonados extends JFrame {
 	private	String telefono;
 	private	int clave;
 	public Object[] fila;
+
+
+	public Abonados() {
+
+	}
 	
 	
-	
+
+	public Abonados(int idAbonado, String nombre, String apellido1, String apellido2, int codzona, int codsector,
+			String direcion, String telefono, int clave, Object[] fila) throws HeadlessException {
+		this.idAbonado = idAbonado;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.codzona = codzona;
+		this.codsector = codsector;
+		this.direcion = direcion;
+		this.telefono = telefono;
+		this.clave = clave;
+		this.fila = fila;
+	}
+
 	public static ArrayList<Abonado> ListarAbonados() {
 		ConectarBD.Conectar();
 		ResultSet resultados = ConectarBD.EjecutarSentencia("SELECT * FROM abonado");
@@ -39,7 +59,8 @@ public class Abonados extends JFrame {
 
 	}
 
-	protected void InsertarAbonado() {
+	public void InsertarAbonado(int idAbonado, String nombre, String apellido1, String apellido2, int codzona,
+			String direcion, String telefono, int clave,int codsector) {
 
 
 
@@ -47,29 +68,7 @@ public class Abonados extends JFrame {
 		int aleatorio2 = (int) (Math.random()*10)+1;
 
 		idAbonado = GeneralID();
-
-		System.out.println("Inserte su nombre");
-		nombre = teclado.next();
-
-		System.out.println("Inserte su primer apellido");
-		apellido1 = teclado.next();
-
-		System.out.println("Inserte su segundo apellido");
-		apellido2 = teclado.next();
-
-		System.out.println("\nInserte su zona\n 1-La Campana\n 2-Sierpes\n 3-Plaza de San Francisco\n 4-Avenida de la Constitucion\n 5-Plaza Virgen de los Reyes");
-		codzona = teclado.nextInt();
-
-		System.out.println();
-
-		System.out.println("inserte su direccion");
-		System.out.println();
-		System.out.println();
-		direcion = teclado.next();
-
-		System.out.println("Inserte su telefono");
-		telefono = teclado.next();
-
+/*
 		System.out.println("Inserte el codigo de su zona");
 
 		switch (codzona) {
@@ -100,19 +99,21 @@ public class Abonados extends JFrame {
 
 		}
 
-
+*/
 
 		clave = codzona+codsector+aleatorio1+aleatorio2;
 
-
+		ConectarBD.Conectar();
 
 		ConectarBD.ejecutarUpdate("INSERT INTO ABONADO VALUES ('"+idAbonado+"','"+nombre+"','"+apellido1+"','"+apellido2+"','"+codzona+"','"+direcion+"','"+telefono+"','"+clave+"','"+codsector+"')");
 		ConectarBD.ejecutarUpdate("INSERT INTO ZONA_ABONADO VALUES ('"+idAbonado+"','"+codzona+"','"+codsector+"')");
+		
+		System.out.println("Abonado añadido");
 	}
 
 
 
-	private int GeneralID()  {
+	public int GeneralID()  {
 		ConectarBD.Conectar();
 
 		ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO");
@@ -132,39 +133,20 @@ public class Abonados extends JFrame {
 		return idAbonado;
 	}
 
-	protected void BorrarAbonado() {
-		System.out.println("Inserte la id del Abonado que se da de baja");
-		int num = teclado.nextInt();
+	public static void BorrarAbonado(int num) {
 		ConectarBD.Conectar();
-		ConectarBD.ejecutarUpdate("DELETE FROM ABONADO WHERE ID_ABONADO = "+num);
 		ConectarBD.ejecutarUpdate("DELETE FROM ZONA_ABONADO WHERE ID_ABONADO ="+num);
+		ConectarBD.ejecutarUpdate("DELETE FROM ABONADO WHERE ID_ABONADO = "+num);
+		System.out.println("Borrado");
 	}
 
-	public void ListarAbonados(int codzona) {
+	public static  ArrayList<Abonado> ListarAbonados(int zona) {
 		ConectarBD.Conectar();
-		ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO WHERE CODZONA ="+codzona);
-		System.out.println("ID_ABONADO\t NOMBRE \t Apellido \t Apellido2\t Direccion \t Zona \t Telefono \t Clave \t Sector");
-		try {
-			while(selectAll.next()) {
+		ResultSet resultados = ConectarBD.EjecutarSentencia("SELECT * FROM abonado WHERE codzona ="+zona);
+		ArrayList<Abonado> abonados = new Controlador.Helper().resultsetAbonado(resultados);
+		return abonados;
 
-				idAbonado = selectAll.getInt("id_abonado");
-				nombre = selectAll.getString("nombre");
-				apellido1 = selectAll.getString("apellido1");
-				apellido2 = selectAll.getString("apellido2");
-				codzona = selectAll.getInt("codzona");
-				direcion = selectAll.getString("DIRECCION");
-				telefono = selectAll.getString("Telefono");
-				clave = selectAll.getInt("clave");
-				codsector = selectAll.getInt("codsector");
-
-				System.out.println(idAbonado+"\t"+nombre+"\t"+apellido1+"\t"+apellido2+"\t"+direcion+"\t"+codzona+"\t"+telefono+"\t"+clave+"\t"+codsector);
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
 
 	}
 
@@ -175,6 +157,6 @@ public class Abonados extends JFrame {
 				+ ", telefono=" + telefono + ", clave=" + clave + ", fila=" + Arrays.toString(fila) + "]";
 	}
 
-	
-	
+
+
 }

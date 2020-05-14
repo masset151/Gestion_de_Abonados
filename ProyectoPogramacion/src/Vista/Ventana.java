@@ -18,20 +18,25 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.soap.Text;
 
 import BBDD.ConectarBD;
+import Controlador.ControladorAbonado;
 import Modelo.Abonados;
 
 public class Ventana extends JFrame implements ActionListener{
 	private JMenuBar menubar;
 	private JMenu menu1,menu2,menu3;
 	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4;
-	private JLabel texto;
+	private JLabel labelzona;
+	private JTextField zona;
 	private JTable registros;
 	private JTable tabla;
 	DefaultTableModel modelo;
 	String datos;
+	int num;
 	
 	public Ventana() {
 		LayoutManager grid = new GridLayout(0,1);
@@ -61,15 +66,29 @@ public class Ventana extends JFrame implements ActionListener{
 		
 		menuItem1.addActionListener(this);
 		
-		menuItem2 = new JMenuItem("Eliminar Abonado");
+		menuItem2 = new JMenuItem("Listar Abonado por Zona");
 		menu2.add(menuItem2);
+		MenuItem3 = new JMenuItem("Añadir Abonados");
+		menu2.add(MenuItem3);
+		MenuItem4 = new JMenuItem("Eliminar Abonado");
+		menu2.add(MenuItem4);
 		
 		menuItem1.addActionListener(this);
+		menuItem2.addActionListener(this);
+		MenuItem3.addActionListener(this);
+		MenuItem4.addActionListener(this);
 		
-		texto = new JLabel();
-		texto.setBounds(200, 100, 640, 480);
-		getContentPane().add(texto);
 		
+		labelzona = new JLabel();
+		
+		labelzona.setText("CONSEJO GENERAL DE HERMANDADES DE SEVILLA");
+		labelzona.setBounds(200, 100, 640, 480);
+		getContentPane().add(labelzona);
+		
+		zona = new JTextField();
+		zona.setBounds(200,370,120,60);
+		getContentPane().add(zona);
+	
 
 		
 		
@@ -79,39 +98,46 @@ public class Ventana extends JFrame implements ActionListener{
 		 //getContentPane().add(tabla);
 		
 	      
-		 String[][] data = { 
-		            { "Kundan Kumar Jha", "4031", "CSE" }, 
-		            { "Anand Jha", "6014", "IT" } 
-		        }; 
-		 
-		 
-		 String[] columnNames = { "Name", "Roll Number", "Department" }; 
-	      
-	      
-	      tabla = new JTable(data,columnNames);
-	      tabla.setBounds(30, 40, 200, 300); 
-	      JScrollPane scrollPane = new JScrollPane(tabla);
-	      add(scrollPane);
+		
 	}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e)  {
+		
 		Abonados abonados = new Abonados();
 		ConectarBD conectar = new ConectarBD();
 		conectar.Conectar();
 		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO") ;
 		
-		 
+		if(e.getSource()==MenuItem3) {
+			
+			AñadirAbonado abonado = new AñadirAbonado();
+			
+		}
+		
+		if(e.getSource()==menuItem2) {
+			datos = zona.getText();
+			num = Integer.parseInt(datos);
+			
+			tablaAbonados abonado = new tablaAbonados(num);
+			
+		}
 		
 		
 		if(e.getSource()==menuItem1) {
 			tablaAbonados tabla = new tablaAbonados();
 
 		}
+		
+		if(e.getSource()==MenuItem4) {
+			 datos = zona.getText();
+			 int num1 = Integer.parseInt(datos);
+			 Controlador.ControladorAbonado.deleteUser(num1);
+		}
 
 				
-				
+			
 			
 			
 			
