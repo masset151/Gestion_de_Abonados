@@ -1,5 +1,6 @@
 package Modelo;
 import java.awt.HeadlessException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 
 import BBDD.ConectarBD;
 import Beans.Abonado;
+import Beans.AbonadoZona;
+import Controlador.ControladorAbonado;
 import Controlador.Helper;
 import Vista.tablaAbonados;
 
@@ -148,6 +151,20 @@ public class Abonados extends JFrame {
 
 		
 
+	}
+	
+	public static ArrayList<AbonadoZona> ContarAbonados() {
+		ConectarBD.Conectar();
+		ResultSet resultado = ConectarBD.EjecutarSentencia("SELECT COUNT(ID_ABONADO) as Num_abonados,z.UBICACION FROM ABONADO a, ZONA z where z.codzona = a.codzona  group by a.codzona");
+		new Controlador.Helper();
+		ArrayList<AbonadoZona>abonadoZonas = Helper.AbonadosZona(resultado);
+		return abonadoZonas;
+	}
+	
+	public static void imprimirAbono(int codabonado) throws IOException {
+		ConectarBD.Conectar();
+		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT ID_ABONADO,CODZONA,CODSECTOR FROM ZONA_ABONADO WHERE ID_ABONADO ="+codabonado);
+		Controlador.ControladorAbonado.ImprimirAbono(rs);
 	}
 
 	@Override

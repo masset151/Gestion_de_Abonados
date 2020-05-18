@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import BBDD.ConectarBD;
 import Beans.Abonado;
+import Beans.AbonadoZona;
 import Controlador.Helper;
 import Modelo.Abonados; 
 public class tablaAbonados extends JFrame {
@@ -19,7 +20,7 @@ public class tablaAbonados extends JFrame {
 	DefaultTableModel modelo;
 	Object[] fila = new Object[9];
 
-	// Constructor 
+	
 	public tablaAbonados() { 
 Abonado datos = new Abonado();
 		modelo = new DefaultTableModel();
@@ -33,7 +34,7 @@ Abonado datos = new Abonado();
 		
 	
 
-	// Column Names 
+	
 	
 	modelo.addColumn("id_abonado");
 	modelo.addColumn("nombre");
@@ -80,7 +81,7 @@ Abonado datos = new Abonado();
 				
 			
 
-			// Column Names 
+			
 			
 			modelo.addColumn("id_abonado");
 			modelo.addColumn("nombre");
@@ -96,7 +97,7 @@ Abonado datos = new Abonado();
 			JScrollPane sp = new JScrollPane(tabla); 
 			add(sp);
 
-			// adding it to JScrollPane 
+			
 			setSize(500, 200); 
 			setVisible(true); 
 			
@@ -148,7 +149,7 @@ Abonado datos = new Abonado();
 			JScrollPane sp = new JScrollPane(tabla); 
 			add(sp);
 
-			// adding it to JScrollPane 
+			
 			setSize(500, 200); 
 			setVisible(true); 
 			
@@ -167,6 +168,50 @@ Abonado datos = new Abonado();
 		} 
 	
 
+	public tablaAbonados(boolean activar) { 
+		
+		
+		
+		
+		AbonadoZona datos = new AbonadoZona();
+				modelo = new DefaultTableModel();
+				tabla = new JTable(modelo);
+				ArrayList<AbonadoZona> abonado ;
+				abonado = Abonados.ContarAbonados();
+				AbonadoZona[] fila = new AbonadoZona[abonado.size()];
+				
+				fila = abonado.toArray(fila);
+				
+				
+			
+
+			
+			
+			modelo.addColumn("numero de abonados");
+			modelo.addColumn("zona");
+			
+
+		 
+			JScrollPane sp = new JScrollPane(tabla); 
+			add(sp);
+
+			
+			setSize(500, 200); 
+			setVisible(true); 
+			
+			
+			
+				for (int i = 0; i < abonado.size(); i++) {
+					modelo.addRow((new Object[] {abonado.get(i).getNumAbonados(),abonado.get(i).getZona()}));
+				}
+
+			
+			
+				
+			
+			
+			
+		} 
 
 
 }

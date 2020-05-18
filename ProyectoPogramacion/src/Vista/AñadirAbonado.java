@@ -23,6 +23,7 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 	    JComboBox<String> zona,sector;
 	    
 	    int numzona,numsector;
+	    int plazasrestantes;
 
 
 	public AñadirAbonado() {
@@ -164,7 +165,7 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 				
 				if("Campana".equals(selecionado)) {
 					numzona = 1;
-					System.out.println(selecionado);
+					
 					
 					
 				
@@ -174,24 +175,24 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 				if("Sierpes".equals(selecionado)) {
 					numzona =2;
 					numsector = 4;
-					System.out.println(selecionado);
+					
 				
 				}
 				if("Plaza de San Francisco".equals(selecionado)) {
 					numzona =3;
-					System.out.println(selecionado);
+					
 				
 				}
 				
 				if("Avenida de la Constitucion".equals(selecionado)) {
 					numzona =4;
-					System.out.println(selecionado);
+					
 				
 				}
 				
 				if("Plaza Virgen de los Reyes".equals(selecionado)) {
 					numzona =5;
-					System.out.println(selecionado);
+					
 				
 				}
 				
@@ -201,8 +202,14 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 				String sectosel = (String) sector.getSelectedItem();
 				
 				if("Palquillo".equals(sectosel)) {
+					
+					
 					numzona = 1;
 					numsector = 0;
+					
+					
+					
+					
 					System.out.println(sectosel);
 				}if("Tribuna A".equals(sectosel)) {
 					numzona = 1;

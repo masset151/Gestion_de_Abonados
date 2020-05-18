@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -30,12 +31,12 @@ import Modelo.Abonados;
 public class Ventana extends JFrame implements ActionListener{
 	private JMenuBar menubar;
 	private JMenu menu1,menu2,menu3;
-	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4;
-	private JLabel labelzona,labelconsejo,labeleliminar;
+	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4,menuItem5,menuItem6;
+	private JLabel labelzona,labelconsejo,labeleliminar,labelImprimir;
 	private JTextField zona;
 	private JTable registros;
 	private JTable tabla;
-	private JButton boton,boton1;
+	private JButton boton,boton1,boton2;
 	DefaultTableModel modelo;
 	String datos;
 	int num;
@@ -74,11 +75,17 @@ public class Ventana extends JFrame implements ActionListener{
 		menu2.add(MenuItem3);
 		MenuItem4 = new JMenuItem("Eliminar Abonado");
 		menu2.add(MenuItem4);
+		menuItem5 = new JMenuItem("Resumen de Abonados por Zona");
+		menu2.add(menuItem5);
+		menuItem6 = new JMenuItem("Imprimir Abono");
+		menu2.add(menuItem6);
 		
 		menuItem1.addActionListener(this);
 		menuItem2.addActionListener(this);
 		MenuItem3.addActionListener(this);
 		MenuItem4.addActionListener(this);
+		menuItem5.addActionListener(this);
+		menuItem6.addActionListener(this);
 		
 		labelconsejo = new JLabel();
 		labelzona = new JLabel();
@@ -89,7 +96,10 @@ public class Ventana extends JFrame implements ActionListener{
 		getContentPane().add(labelconsejo);
 		
 		
-		
+		labelImprimir = new JLabel("inserte el numero del abonado");
+		labelImprimir.setBounds(200, 100, 640, 480);
+		getContentPane().add(labelImprimir);
+		labelImprimir.setVisible(false);
 		
 		labelzona.setText("Introduzca el codigo de la zona");
 		labelzona.setBounds(200, 100, 640, 480);
@@ -119,6 +129,11 @@ public class Ventana extends JFrame implements ActionListener{
 		boton1.addActionListener(this);
 		boton1.setVisible(false);
 		
+		boton2 = new JButton("Imprimir");
+		boton2.setBounds(200,470,120,20);
+		add(boton2);
+		boton2.addActionListener(this);
+		boton2.setVisible(false);
 		
 		
 		
@@ -181,7 +196,36 @@ public class Ventana extends JFrame implements ActionListener{
 			 Controlador.ControladorAbonado.deleteUser(num1);
 		}
 
+		
+		if(e.getSource()==menuItem5) {
+			labelconsejo.setVisible(false);
+			tablaAbonados abonado = new tablaAbonados(true);
+		}
 				
+		
+		if(e.getSource()==menuItem6) {
+			
+			labelconsejo.setVisible(false);
+			labelImprimir.setVisible(true);
+			zona.setVisible(true);
+			boton2.setVisible(true);
+			
+			
+		}if(e.getSource()==boton2) {
+			
+			String datos = zona.getText();
+			int num = Integer.parseInt(datos);
+			
+			
+			try {
+				
+				Modelo.Abonados.imprimirAbono(num);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
 			
 			
 			
