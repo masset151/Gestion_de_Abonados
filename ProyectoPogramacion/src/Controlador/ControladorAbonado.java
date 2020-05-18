@@ -18,9 +18,7 @@ public class ControladorAbonado{
 		
 		Abonados abonado = new Abonados();
 		int idAbonado = 5;
-		codzona = 1;
-		clave = 0;
-		codsector = 1;
+		
 		
 		abonado.InsertarAbonado(idAbonado, nombre, apellido1, apellido2, codzona, direcion, telefono, clave, codsector);
 		

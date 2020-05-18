@@ -73,8 +73,23 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 		sector.addItem("Tribuna A");
 		sector.addItem("Tribuna B");
 		sector.addItem("Plaza del Duque");
-		zona.addItem("Sierpes");
+		sector.addItem("Sierpes");
+		sector.addItem("Sector A");
+		sector.addItem("Sector B");
+		sector.addItem("Sector C");
+		sector.addItem("Palcos Avenida");
+		sector.addItem("Banco de España");
+		sector.addItem("Tramo 40");
+		sector.addItem("Tramo 50");
+		sector.addItem("Tramo 60");
+		sector.addItem("Tramo 70");
+		sector.addItem("Fuente");
+		sector.addItem("Catedral");
 		
+		zona.addItem("Sierpes");
+		zona.addItem("Plaza de San Francisco");
+		zona.addItem("Avenida de la Constitucion");
+		zona.addItem("Plaza Virgen de los Reyes");
 
 		
 		
@@ -136,7 +151,7 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 		
 		
 			if(e.getSource()==boton1) {
-				// Llamar al controlador
+				
 				
 				String nom = text1.getText();
 				String ap1 = text2.getText();
@@ -144,27 +159,101 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 				String dire = text4.getText();
 				String tele = text5.getText();
 				
+				String selecionado = (String)zona.getSelectedItem();
 				
-				if(zona.getSelectedItem().equals("La Campana")){
-
-					if(sector.getSelectedItem().equals("Palquillo")) {
-						
-						numsector = 0;
-						
-					}if(sector.getSelectedItem().equals("Tribuna A")) {
-						numsector = 1;
-					}if (sector.getSelectedItem().equals("Tribuna B")) {
-						numsector = 2;
-					}if(sector.getSelectedItem().equals("Plaza del Duque")) {
-						numsector = 3;
-					}
-					
-				 
+				
+				if("Campana".equals(selecionado)) {
+					numzona = 1;
+					System.out.println(selecionado);
 					
 					
-				}else {
-					numzona = 0;
+				
 				}
+				
+				
+				if("Sierpes".equals(selecionado)) {
+					numzona =2;
+					numsector = 4;
+					System.out.println(selecionado);
+				
+				}
+				if("Plaza de San Francisco".equals(selecionado)) {
+					numzona =3;
+					System.out.println(selecionado);
+				
+				}
+				
+				if("Avenida de la Constitucion".equals(selecionado)) {
+					numzona =4;
+					System.out.println(selecionado);
+				
+				}
+				
+				if("Plaza Virgen de los Reyes".equals(selecionado)) {
+					numzona =5;
+					System.out.println(selecionado);
+				
+				}
+				
+				
+				
+				
+				String sectosel = (String) sector.getSelectedItem();
+				
+				if("Palquillo".equals(sectosel)) {
+					numzona = 1;
+					numsector = 0;
+					System.out.println(sectosel);
+				}if("Tribuna A".equals(sectosel)) {
+					numzona = 1;
+					numsector = 1;
+					System.out.println(sectosel);
+				}if("Tribuna B".equals(sectosel)) {
+					numzona = 1;
+					numsector = 2;
+					System.out.println(sectosel);
+				}if("Plaza del Duque".equals(sectosel)) {
+					numzona = 1;
+					numsector = 3	;
+					System.out.println(sectosel);
+				}if("Sector A".equals(sectosel)) {
+					numzona = 3;
+					numsector = 5;
+				}if("Sector B".equals(sectosel)) {
+					numzona = 3;
+					numsector = 6;
+				}if("Sector C".equals(sectosel)) {
+					numzona = 3;
+					numsector = 7;
+				}if("Palcos Avenida".equals(sectosel)) {
+					numzona = 4;
+					numsector = 8;
+				}if("Banco de España".equals(sectosel)) {
+					numzona = 4;
+					numsector = 9;
+				}if("Tramo 40".equals(sectosel)) {
+					numzona = 4;
+					numsector = 10;
+				}if("Tramo 50".equals(sectosel)) {
+					numzona = 4;
+					numsector = 11;
+				}if("Tramo 60".equals(sectosel)) {
+					numzona = 4;
+					numsector = 12;
+				}if("Tramo 70".equals(sectosel)) {
+					numzona = 4;
+					numsector = 13;
+				}if("Fuente".equals(sectosel)) {
+					numzona = 5;
+					numsector = 14;
+				}if("Catedral".equals(sectosel)) {
+					numzona = 5;
+					numsector = 15;
+				}
+				
+				
+				
+				
 				
 				new Controlador.ControladorAbonado().insertUser(nom, ap1, ap2,numzona, dire, tele,numsector);
 				System.out.println("Datos Recogidos"+nom);

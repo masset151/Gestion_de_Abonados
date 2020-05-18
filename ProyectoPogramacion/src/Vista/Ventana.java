@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -30,10 +31,11 @@ public class Ventana extends JFrame implements ActionListener{
 	private JMenuBar menubar;
 	private JMenu menu1,menu2,menu3;
 	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4;
-	private JLabel labelzona;
+	private JLabel labelzona,labelconsejo,labeleliminar;
 	private JTextField zona;
 	private JTable registros;
 	private JTable tabla;
+	private JButton boton,boton1;
 	DefaultTableModel modelo;
 	String datos;
 	int num;
@@ -78,25 +80,52 @@ public class Ventana extends JFrame implements ActionListener{
 		MenuItem3.addActionListener(this);
 		MenuItem4.addActionListener(this);
 		
-		
+		labelconsejo = new JLabel();
 		labelzona = new JLabel();
+		labeleliminar = new JLabel();
 		
-		labelzona.setText("CONSEJO GENERAL DE HERMANDADES DE SEVILLA");
+		labelconsejo.setText("Consejo General de Hermandad y Cofradias");
+		labelconsejo.setBounds(200, 100, 640, 480);
+		getContentPane().add(labelconsejo);
+		
+		
+		
+		
+		labelzona.setText("Introduzca el codigo de la zona");
 		labelzona.setBounds(200, 100, 640, 480);
 		getContentPane().add(labelzona);
+		labelzona.setVisible(false);
+		
+		labeleliminar.setText("Introduzca el codigo del abonado que desee eliminar");
+		labeleliminar.setBounds(200, 100, 640, 480);
+		getContentPane().add(labeleliminar);
+		labeleliminar.setVisible(false);
 		
 		zona = new JTextField();
-		zona.setBounds(200,370,120,60);
+		zona.setBounds(200,370,120,20);
 		getContentPane().add(zona);
+		zona.setVisible(false);
 	
+		boton = new JButton("Enviar");
+		boton.setBounds(200,470,120,20);
+		add(boton);
+		getContentPane().add(boton);
+		boton.addActionListener(this);
+		boton.setVisible(false);
+		
+		boton1 = new JButton("Eliminar");
+		boton1.setBounds(200, 470, 120, 20);
+		add(boton1);
+		boton1.addActionListener(this);
+		boton1.setVisible(false);
+		
+		
+		
+		
 
 		
 		
-		 //tabla = new JTable(modelo);
-		
-		
-		 //getContentPane().add(tabla);
-		
+		 
 	      
 		
 	}
@@ -105,10 +134,6 @@ public class Ventana extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e)  {
 		
-		Abonados abonados = new Abonados();
-		ConectarBD conectar = new ConectarBD();
-		conectar.Conectar();
-		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT * FROM ABONADO") ;
 		
 		if(e.getSource()==MenuItem3) {
 			
@@ -117,9 +142,24 @@ public class Ventana extends JFrame implements ActionListener{
 		}
 		
 		if(e.getSource()==menuItem2) {
+			labelconsejo.setVisible(false);
+			labelzona.setVisible(true);
+			zona.setVisible(true);
+			boton.setVisible(true);
+			
+
+			
+			
+
+
+
+
+
+
+		}if(e.getSource()==boton) {
+			
 			datos = zona.getText();
 			num = Integer.parseInt(datos);
-			
 			tablaAbonados abonado = new tablaAbonados(num);
 			
 		}
@@ -131,6 +171,11 @@ public class Ventana extends JFrame implements ActionListener{
 		}
 		
 		if(e.getSource()==MenuItem4) {
+			labeleliminar.setVisible(true);
+			labelconsejo.setVisible(false);
+			zona.setVisible(true);
+			boton1.setVisible(true);
+		}if(e.getSource()==boton1) {
 			 datos = zona.getText();
 			 int num1 = Integer.parseInt(datos);
 			 Controlador.ControladorAbonado.deleteUser(num1);
@@ -143,6 +188,9 @@ public class Ventana extends JFrame implements ActionListener{
 			
 			
 		}
+
+
+	
 			
 			
 				
