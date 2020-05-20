@@ -1,12 +1,17 @@
 package Modelo;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import BBDD.ConectarBD;
+import Vista.Ventana;
 
 public class Usuarios {
 
 	static Scanner teclado = new Scanner(System.in);
+	int idusuario;
 
 	private static void VerUsuarios() {
 		ConectarBD.Conectar();
@@ -48,12 +53,11 @@ public class Usuarios {
 
 
 
-	private static void Login() {
-		String passTeclado = "usuario";
-		String nombreTeclado = "root";
+	public static void Login(String passTeclado,String nombreTeclado) {
 
 
 
+		boolean login = false;
 		ConectarBD.Conectar();
 
 
@@ -61,11 +65,23 @@ public class Usuarios {
 		try {
 
 			while(selectAll.next()) {
+
 				if(selectAll.getString("nombre").equals(nombreTeclado) & selectAll.getString("password").equals(passTeclado)){
-					System.out.println("Login Correcto");
+
+					login = true;
 				}else {
-					System.out.println("el usuario o la contraseña no estan en nuestra base de datos");
+					login = false;
 				}
+
+
+
+			}
+
+			if(login==true) {
+				Ventana ventana = new Ventana();
+				ventana.setVisible(true);
+			}else {
+				JOptionPane.showMessageDialog(null,"Error,el usuario o la contraseña no coinciden");
 			}
 
 
@@ -76,7 +92,7 @@ public class Usuarios {
 
 
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
+			JOptionPane.showMessageDialog(null,"Error de ejecucion");
 		}
 
 
@@ -90,9 +106,96 @@ public class Usuarios {
 
 		ConectarBD.Conectar();
 		ConectarBD.EjecutarSentencia("delete from USUARIOS where nombre = '"+nombre+"'");
-		
+
 	}
 
+	public void Registro(String usuario,String contra) {
+
+		boolean disponible = checkAbonado(usuario);
+		int id = GeneralID();
+		ConectarBD.Conectar();
+		
+
+
+		if(disponible) {
+			ConectarBD.ejecutarUpdate("INSERT INTO USUARIOS VALUES ('"+id+"','"+usuario+"','"+contra+"')");
+			JOptionPane.showMessageDialog(null,"registrado");
+		}else {
+			JOptionPane.showMessageDialog(null,"el nombre de usuario esta cogido, pruebe con otro");
+		}
+
+
+
+
+	}
+
+
+	private static boolean checkAbonado(String usuario) {
+		
+		boolean disponible = false;
+		
+
+
+
+		try {
+			
+			ConectarBD.Conectar();
+			ResultSet rs = ConectarBD.EjecutarSentencia("SELECT * from usuarios where nombre ="+usuario);
+			String user = null;
+			disponible = true;
+			
+			while(rs.next()) {
+				if(usuario.equals(rs.getString("NOMBRE"))){
+					disponible = false;
+					
+				}
+				
+			
+				
+				
+				
+
+			}
+			
+		
+			
+
+			if(disponible) {
+				return true;
+			}else {
+				return false;
+			}
+			
+
+		}catch (Exception e) {
+			//JOptionPane.showMessageDialog(null,"Error al comprobar los datos");
+			return false;
+		}
+		
+
+
+
+	}
+
+	public int GeneralID()  {
+		ConectarBD.Conectar();
+
+		ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT COUNT(ID) AS ID FROM USUARIOS");
+
+
+		try {
+			while(selectAll.next()) {
+				idusuario = selectAll.getInt("ID");
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,"Error al generar la id");
+		}
+
+		idusuario++;
+		System.out.print(idusuario);
+
+		return idusuario;
+	}
 
 
 

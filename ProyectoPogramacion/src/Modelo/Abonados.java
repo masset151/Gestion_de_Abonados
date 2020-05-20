@@ -71,38 +71,7 @@ public class Abonados extends JFrame {
 		int aleatorio2 = (int) (Math.random()*10)+1;
 
 		idAbonado = GeneralID();
-/*
-		System.out.println("Inserte el codigo de su zona");
 
-		switch (codzona) {
-		case 1:
-			System.out.println("Elige Zona \n 0-PALQUILLO\n 1-TRIBUNA A \n 2-TRIBUNA B \n 3-DUQUE");
-			codsector = teclado.nextInt();
-			break;
-
-		case 2:
-			System.out.println("la Calle sierpes solo tiene un sector el numero 4");
-			codsector = 4;
-			break;
-
-		case 3:
-			System.out.println("Elige Zona \n 5-SECTOR A \n 6-SECTOR B\n 7-SECTOR C");
-			codsector = teclado.nextInt();
-			break;
-
-		case 4:
-			System.out.println("Elige Zona \n 8-PALCOS AVENIDA \n 9-BANCO DE ESPAÑA \n 10-TRAMO 40\n 11-TRAMO 50\n 12- TRAMO 60 \n 13-TRAMO 70");
-			codsector = teclado.nextInt();
-			break;
-
-		case 6:
-			System.out.println("Elige Zona \n 14-FUENTE \n 15-CATEDRAL");
-			codsector = teclado.nextInt();
-
-
-		}
-
-*/
 
 		clave = codzona+codsector+aleatorio1+aleatorio2;
 

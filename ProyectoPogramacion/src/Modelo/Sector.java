@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import BBDD.ConectarBD;
 
@@ -11,23 +12,12 @@ public class Sector {
 	private int codzona;
 	
 	
-	public void ListarSectores() {
+	public  static ArrayList<Beans.Sector> listarSectores() {
 		ConectarBD.Conectar();
-		ResultSet selectAll = ConectarBD.EjecutarSentencia("SELECT * FROM SECTOR");
+		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT * FROM SECTOR");
+		ArrayList<Beans.Sector> sector = new Controlador.Helper().Sector(rs);
+		return sector;
 		
-		try {
-			System.out.println("codsector"+"\t"+"sector"+"\t"+"codzona");
-			while(selectAll.next()) {
-				codsector = selectAll.getInt("codsector");
-				sector = selectAll.getString("sector");
-				codzona = selectAll.getInt("codzona");
-				
-				
-				System.out.println(codsector+"\t"+sector+"\t"+codzona);
-			}
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
 	}
 	
 	

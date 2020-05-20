@@ -8,11 +8,16 @@ import javax.swing.JOptionPane;
 import BBDD.ConectarBD;
 import Beans.Abonado;
 import Beans.AbonadoZona;
+import Beans.Zona;
 
 public class Helper {
 
 	ArrayList<Abonado> arraylist ;
 	static ArrayList<AbonadoZona>abonadosZona;
+	static ArrayList<Zona> zona;
+	static ArrayList<Beans.Sector>sector;
+	
+	
 	public ArrayList<Abonado> resultsetAbonado(ResultSet rs){
 		arraylist = new ArrayList<Abonado>();
 
@@ -102,10 +107,58 @@ public class Helper {
 
 	}
 
+	public static ArrayList<Zona> Zona(ResultSet rs) {
+		zona = new ArrayList<Zona>();
+
+		try {
+
+			while (rs.next()) {
+				int codzona = rs.getInt("codzona");
+				String ubicacion = rs.getString("UBICACION");
+
+
+				zona.add(new Zona(codzona,ubicacion));
+			}
 
 
 
 
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Error en la consulta");
+		}
+		System.out.println(zona.size());
+		return zona;
+
+
+	}
+
+
+	public static ArrayList<Beans.Sector> Sector(ResultSet rs) {
+		sector = new ArrayList<Beans.Sector>();
+
+		try {
+
+			while (rs.next()) {
+				int codsector = rs.getInt("codsector");
+				String nsector = rs.getString("Sector");
+				int codzona = rs.getInt("codzona");
+
+
+				sector.add(new Beans.Sector(codsector,nsector,codzona));
+			}
+
+
+
+
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Error en la consulta");
+		}
+		
+		JOptionPane.showMessageDialog(null,sector.size());
+		return sector;
+
+
+	}
 
 }
 

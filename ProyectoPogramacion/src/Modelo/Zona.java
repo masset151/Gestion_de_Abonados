@@ -1,32 +1,22 @@
 package Modelo;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import BBDD.ConectarBD;
+import Beans.Abonado;
 
 public class Zona {
 	private int codzona;
 	private String ubicacion;
 
 
-	public void listarZona() {
+	public static ArrayList<Beans.Zona> ListarZonas() {
 		ConectarBD.Conectar();
-		ResultSet selectAll	= ConectarBD.EjecutarSentencia("SELECT * FROM ZONA");
-		try {
-			
-			System.out.println("codzona"+"\t"+"ubicacion");
-			
-			while(selectAll.next()) {
-				codzona = selectAll.getInt("codzona");
-				ubicacion = selectAll.getString("ubicacion");
-				
-				System.out.println(codzona+"\t"+ubicacion);
-			}
+		ResultSet resultados = ConectarBD.EjecutarSentencia("SELECT * FROM zona");
+		ArrayList<Beans.Zona> zona = new Controlador.Helper().Zona(resultados);
+		return zona;
 
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		
 
 	}
 
