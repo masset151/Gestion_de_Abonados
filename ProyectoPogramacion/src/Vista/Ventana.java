@@ -222,6 +222,9 @@ public class Ventana extends JFrame implements ActionListener{
 		
 		if(e.getSource()==menuItem2) {
 			labelconsejo.setVisible(false);
+			labeleliminar.setVisible(false);
+			registrar.setVisible(false);
+			imprimir.setVisible(false);
 			labelzona.setVisible(true);
 			zona.setVisible(true);
 			boton.setVisible(true);
@@ -239,7 +242,18 @@ public class Ventana extends JFrame implements ActionListener{
 			
 			datos = zona.getText();
 			num = Integer.parseInt(datos);
+			
+			
 			tablaAbonados abonado = new tablaAbonados(num);
+			
+			labelconsejo.setVisible(true);
+			labeleliminar.setVisible(false);
+			registrar.setVisible(true);
+			imprimir.setVisible(true);
+			labelzona.setVisible(false);
+			zona.setVisible(false);
+			boton.setVisible(false);
+			
 			
 		}
 		
