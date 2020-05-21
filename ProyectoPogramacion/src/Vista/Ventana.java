@@ -35,16 +35,18 @@ import Modelo.Abonados;
 public class Ventana extends JFrame implements ActionListener{
 	private JMenuBar menubar;
 	private JMenu menu1,menu2,menu3,menu4;
-	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4,menuItem5,menuItem6,menuItem7;
+	private JMenuItem menuItem1,menuItem2,MenuItem3,MenuItem4,menuItem5,menuItem6,menuItem7,menuItem8;
 	private JLabel labelzona,labelconsejo,labeleliminar,labelImprimir;
 	private JTextField zona;
 	private JTable registros;
 	private JTable tabla;
-	private JButton boton,boton1,boton2,registrar,imprimir;
+	private JButton boton,boton1,boton2,registrar,imprimir,boton3;
 	private JPanel panel;
 	DefaultTableModel modelo;
 	String datos;
 	int num;
+	String zonat;
+	int codzona;
 	
 	
 	ImageIcon iconobtn = new ImageIcon("src/Imagenes/nuevousuario.png");
@@ -74,6 +76,16 @@ public class Ventana extends JFrame implements ActionListener{
 		menu3 = new JMenu("Zona");
 		menubar.add(menu3);
 		
+		menu4 = new JMenu("Sector");
+		menubar.add(menu4);
+		
+		menuItem6 = new JMenuItem("Listar Sectores");
+		menu4.add(menuItem6);
+		
+		menuItem8 = new JMenuItem("Listar sectores por zona");
+		menu4.add(menuItem8);
+		menuItem8.addActionListener(this);
+		
 		
 		menu2= new JMenu("Gestionar");
 		menu1.add(menu2);
@@ -98,6 +110,7 @@ public class Ventana extends JFrame implements ActionListener{
 		menuItem2.addActionListener(this);
 		MenuItem4.addActionListener(this);
 		menuItem5.addActionListener(this);
+		menuItem6.addActionListener(this);
 		menuItem7.addActionListener(this);
 		
 		labelconsejo = new JLabel();
@@ -116,7 +129,7 @@ public class Ventana extends JFrame implements ActionListener{
 		labelImprimir.setVisible(false);
 		
 		labelzona.setText("Introduzca el codigo de la zona");
-		labelzona.setBounds(200, 100, 640, 480);
+		labelzona.setBounds(150, 30, 360, 100);
 		getContentPane().add(labelzona);
 		labelzona.setVisible(false);
 		
@@ -149,6 +162,12 @@ public class Ventana extends JFrame implements ActionListener{
 		add(boton2);
 		boton2.addActionListener(this);
 		boton2.setVisible(false);
+		
+		boton3 = new JButton("Enviar");
+		boton3.setBounds(190, 210, 120, 20);
+		add(boton3);
+		boton3.setVisible(false);
+		boton3.addActionListener(this);
 		
 		registrar = new JButton("Añadir");
 		registrar.setBounds(100, 70, 200, 150);
@@ -332,7 +351,41 @@ public class Ventana extends JFrame implements ActionListener{
 		}
 			
 			
+		if(e.getSource()==menuItem6)	{
+			TablaSector sector = new TablaSector();
+		}
+		
+		if(e.getSource()==menuItem8) {
 			
+			
+			
+			
+			
+			labelconsejo.setVisible(false);
+			labeleliminar.setVisible(false);
+			registrar.setVisible(false);
+			imprimir.setVisible(false);
+			labelzona.setVisible(true);
+			zona.setVisible(true);
+			boton3.setVisible(true);
+			
+			
+			
+		}if(e.getSource()==boton3) {
+			zonat = zona.getText();
+			codzona = Integer.parseInt(zonat);
+			
+			TablaSector sector = new TablaSector(codzona);
+			
+			labelconsejo.setVisible(true);
+			labeleliminar.setVisible(false);
+			registrar.setVisible(true);
+			imprimir.setVisible(true);
+			labelzona.setVisible(false);
+			zona.setVisible(false);
+			boton3.setVisible(false);
+			
+		}
 			
 		}
 

@@ -154,7 +154,7 @@ public class Helper {
 			JOptionPane.showMessageDialog(null,"Error en la consulta");
 		}
 		
-		JOptionPane.showMessageDialog(null,sector.size());
+		//JOptionPane.showMessageDialog(null,sector.size());
 		return sector;
 
 

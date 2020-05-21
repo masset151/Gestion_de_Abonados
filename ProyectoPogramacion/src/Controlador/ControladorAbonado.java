@@ -47,17 +47,25 @@ public class ControladorAbonado{
 		File f = new File("Abono.md");
 		FileWriter fw = new FileWriter(f);
 		int codabonado = 0;
+		String nombre,apellido1,apellido2;
 		int codzona = 0;
+		String ubicacion;
 		int codsector = 0;
+		String sector;
 		
 		
 		try {
 			while(rs.next()) {
 				 codabonado = rs.getInt("id_abonado");
+				 nombre = rs.getString("nombre");
+				 apellido1 = rs.getString("apellido1");
+				 apellido2 = rs.getString("apellido2");
 				 codzona = rs.getInt("codzona");
+				 ubicacion = rs.getString("ubicacion");
 				 codsector = rs.getInt("codsector");
+				 sector = rs.getString("sector");
 			
-				 fw.write("**CodigoAbonado "+codabonado+"**\n-- Codigo Zona "+codzona+"\n    - Codigo Sector "+codsector);
+				 fw.write("**"+codabonado+" "+nombre+" "+apellido1+" "+apellido2+"**\n-- "+codzona+" "+ubicacion+"\n    -  "+codsector+" "+sector);
 				 
 			}
 		} catch (SQLException e1) {

@@ -20,6 +20,14 @@ public class Sector {
 		
 	}
 	
+	public  static ArrayList<Beans.Sector> listarSectores(int num) {
+		ConectarBD.Conectar();
+		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT * FROM SECTOR WHERE codzona="+num);
+		ArrayList<Beans.Sector> sector = new Controlador.Helper().Sector(rs);
+		return sector;
+		
+	}
+	
 	
 	public void ListarSectores(int num) {
 		ConectarBD.Conectar();

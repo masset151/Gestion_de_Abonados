@@ -132,7 +132,9 @@ public class Abonados extends JFrame {
 	
 	public static void imprimirAbono(int codabonado) throws IOException {
 		ConectarBD.Conectar();
-		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT ID_ABONADO,CODZONA,CODSECTOR FROM ZONA_ABONADO WHERE ID_ABONADO ="+codabonado);
+		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT a.ID_ABONADO,a.nombre,a.apellido1,a.apellido2,z.CODZONA,b.Ubicacion,z.CODSECTOR, s.sector \r\n" + 
+				"FROM  zona_abonado z , ABONADO a ,Sector s ,Zona b \r\n" + 
+				"WHERE a.id_abonado = z.id_abonado and b.codzona = s.codzona and s.codsector = z.codsector and  z.ID_ABONADO = "+codabonado);
 		Controlador.ControladorAbonado.ImprimirAbono(rs);
 	}
 
