@@ -65,7 +65,7 @@ public class ControladorAbonado{
 				 codsector = rs.getInt("codsector");
 				 sector = rs.getString("sector");
 			
-				 fw.write("**"+codabonado+" "+nombre+" "+apellido1+" "+apellido2+"**\n-- "+codzona+" "+ubicacion+"\n    -  "+codsector+" "+sector);
+				 fw.write("**"+codabonado+" "+nombre+" "+apellido1+" "+apellido2+"**\n\n- "+codzona+" "+ubicacion+"\n    -  "+codsector+" "+sector);
 				 
 			}
 		} catch (SQLException e1) {

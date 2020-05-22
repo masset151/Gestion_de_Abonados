@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,6 +19,12 @@ public class Zona {
 		return zona;
 
 
+	}
+	
+	public static void ImprimirListadoAbonados(int codzona) throws IOException {
+		ConectarBD.Conectar();
+		ResultSet rs = ConectarBD.EjecutarSentencia("SELECT ID_ABONADO,NOMBRE,APELLIDO1,APELLIDO2,CODZONA,CODSECTOR FROM ABONADO WHERE CODZONA ="+codzona);
+		Controlador.ControladorZona.ImprimirListadoAbonados(rs);
 	}
 
 }

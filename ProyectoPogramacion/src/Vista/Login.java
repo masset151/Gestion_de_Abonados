@@ -24,6 +24,8 @@ public class Login extends JFrame implements ActionListener {
 	setTitle("Iniciar Sesion"); 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 setBounds(100, 100, 450, 300);
+	 setResizable(false);
+		
 	 
 	 panel = new JPanel();
 	 panel.setBorder(new EmptyBorder(5,5,5,5));

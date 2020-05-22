@@ -130,6 +130,7 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 	        panelab.setLayout(new FlowLayout());
 	        panelab.setPreferredSize(new Dimension(200,50));
 	        boton1.addActionListener(this);
+	        boton2.addActionListener(this);
 	        panelab.add(boton1);
 	        panelab.add(boton2);
 	      
@@ -148,6 +149,11 @@ public class AñadirAbonado extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
+		if(e.getSource()==boton2) {
+			setVisible(false);
+		}
 		
 		
 		
