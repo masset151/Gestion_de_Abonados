@@ -1,0 +1,11 @@
+Dudas 
+1-¿Como consigo que me salga un texto abajo de la caja de texto donde ponga inserte el codigo zona o el codigo abonado dependiendo
+de donde pulse el usuario?
+
+2-¿puedo insertar la tabla en la propia ventana principal sin tener que abrir una ventana aparte?
+
+3-¿Puedo poner el menu vertical en lugar de donde la orientacion actual?
+
+4-¿ al eliminar un abonado me lo elimina pero me deja eliminar mas sin reiniciar el pograma?
+
+5-¿fallos errores y mejoras que creeas que puedo hacer?

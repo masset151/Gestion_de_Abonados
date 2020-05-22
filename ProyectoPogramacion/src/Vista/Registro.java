@@ -43,7 +43,7 @@ public class Registro extends JFrame  implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
-		setSize(1080,720);
+		setSize(600,200);
 
 		usuario.setText("Usuario");
 		contra.setText("Contraseña");
