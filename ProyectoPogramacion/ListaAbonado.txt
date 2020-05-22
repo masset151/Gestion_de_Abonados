@@ -1,0 +1,6 @@
+8	Pablo	Casado	Blanco	4	8
+9	Santiago	Abascal	Condel	4	9
+10	Gabriel	Rufian	Rufian	4	10
+11	Mariano	Rajoy	Brey	4	11
+12	Jose Luis	Rodriquez	Zapatero	4	12
+13	Jose Maria	Aznar	Lopez	4	13
